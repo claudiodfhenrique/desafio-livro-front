@@ -1,0 +1,21 @@
+<form [formGroup]="formGroup">
+    <mat-card appearance="outlined">
+        <mat-card-title>Autores</mat-card-title>
+        <mat-card-subtitle>Gerenciamento dos autores</mat-card-subtitle>
+        <mat-card-content>    
+            <mat-form-field>
+                <mat-label>Nome</mat-label>
+                <input matInput formControlName="nome">
+            </mat-form-field>            
+            <div class="button-row">                
+                <button 
+                    mat-stroked-button 
+                    (click)="save()" 
+                    [disabled]="isLoading()"
+                >
+                    {{ isLoading() ? 'Enviando' : 'Salvar' }}
+                </button>
+            </div>    
+        </mat-card-content>
+    </mat-card> 
+</form>
