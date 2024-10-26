@@ -16,6 +16,9 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginatorIntlonf } from '../../shared/injectors/mat-paginator-intl-conf.injector';
 import { MatIconModule } from '@angular/material/icon';
+import { AutorService } from '../../shared/services/autor.service';
+import { MatSelectModule } from '@angular/material/select';
+import { Autor } from '../../shared/models/autor.model';
 
 @Component({
   selector: 'app-livros',
@@ -35,10 +38,12 @@ import { MatIconModule } from '@angular/material/icon';
     MatPaginator,
     MatPaginatorModule,    
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ],
   providers: [
     LivroService,
+    AutorService,
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlonf }
   ],
   templateUrl: './livros.component.html',
@@ -57,21 +62,26 @@ export class LivrosComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  autores: Autor[] = [];  
+
   constructor(
     private fb: FormBuilder,
     private service: LivroService,
+    private autorService: AutorService,
     private snackBar: MatSnackBar) {
     this.formGroup = this.fb.group({
       cod: [],
       titulo: [null, [Validators.required, Validators.maxLength(100)]],
       editora: [null, [Validators.required, Validators.maxLength(100)]],
       edicao: [null, Validators.required],
-      anoPublicacao: [null, [Validators.required, Validators.min(1900)]]
+      anoPublicacao: [null, [Validators.required, Validators.min(1900)]],      
+      livroAutores: [null],
     });
   }
 
   async ngOnInit(): Promise<void> {    
     await this.loadData();
+    this.autores = await lastValueFrom(this.autorService.all());
   }
 
   private async loadData(): Promise<void> {

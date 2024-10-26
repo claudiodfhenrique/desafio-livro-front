@@ -1,5 +1,5 @@
-import { Assunto } from "./assunto.model";
-import { Autor } from "./autor.model";
+import { LivroAssunto } from "./livro-assunto.model";
+import { LivroAutor } from "./livro-autor.model";
 
 export interface Livro {
   cod: number;
@@ -7,6 +7,6 @@ export interface Livro {
   editora: string;
   edicao: number;
   anoPublicacao: number;
-  assuntos: Assunto[],
-  autores: Autor[]
+  livroAssuntos: LivroAssunto[],
+  livroAutor: LivroAutor[]
 }

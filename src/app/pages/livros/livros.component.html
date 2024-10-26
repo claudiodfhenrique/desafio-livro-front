@@ -2,7 +2,7 @@
     <mat-card-title>Livros</mat-card-title>
     <mat-card-subtitle>Gerenciamento dos livros</mat-card-subtitle>
     <mat-card-content>
-        <form [formGroup]="formGroup">
+        <form [formGroup]="formGroup">            
             <div class="row">                    
                 <div class="column">
                     <mat-form-field>
@@ -30,7 +30,17 @@
                         <input matInput formControlName="anoPublicacao" type="number" min="1900" max="9999">
                     </mat-form-field>
                 </div>
-            </div>            
+            </div>  
+            <div class="row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Autor</mat-label>
+                    <mat-select formControlName="livroAssuntos" multiple>
+                        <mat-option *ngFor="let option of autores" [value]="option.codAu">
+                        {{ option.nome }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>          
             <div class="button-row">                
                 <button 
                     mat-stroked-button 
