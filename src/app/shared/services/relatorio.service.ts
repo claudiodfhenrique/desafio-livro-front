@@ -10,6 +10,6 @@ export class RelatorioService {
   constructor(private http: HttpClient) { }
 
   public all(): Observable<Relatorio[]> {
-    return this.http.get<Relatorio[]>(`${environment.apiUrl}/assunto/todos`);
+    return this.http.get<Relatorio[]>(`${environment.apiUrl}/relatorio`);
   }
 }
