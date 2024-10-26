@@ -7,6 +7,6 @@ export interface Livro {
   editora: string;
   edicao: number;
   anoPublicacao: number;
-  livroAssuntos: LivroAssunto[],
+  livroAssunto: LivroAssunto[],
   livroAutor: LivroAutor[]
 }

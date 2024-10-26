@@ -19,6 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { AutorService } from '../../shared/services/autor.service';
 import { MatSelectModule } from '@angular/material/select';
 import { Autor } from '../../shared/models/autor.model';
+import { AssuntoService } from '../../shared/services/assunto.service';
+import { Assunto } from '../../shared/models/assunto.model';
 
 @Component({
   selector: 'app-livros',
@@ -44,6 +46,7 @@ import { Autor } from '../../shared/models/autor.model';
   providers: [
     LivroService,
     AutorService,
+    AssuntoService,
     { provide: MatPaginatorIntl, useClass: MatPaginatorIntlonf }
   ],
   templateUrl: './livros.component.html',
@@ -64,11 +67,14 @@ export class LivrosComponent implements OnInit {
 
   autores: Autor[] = [];  
 
+  assuntos: Assunto[] = [];
+
   constructor(
     private fb: FormBuilder,
     private service: LivroService,
     private autorService: AutorService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private assuntoService: AssuntoService) {
     this.formGroup = this.fb.group({
       cod: [],
       titulo: [null, [Validators.required, Validators.maxLength(100)]],
@@ -76,12 +82,14 @@ export class LivrosComponent implements OnInit {
       edicao: [null, Validators.required],
       anoPublicacao: [null, [Validators.required, Validators.min(1900)]],      
       livroAutores: [null],
+      livroAssuntos: [null],
     });
   }
 
   async ngOnInit(): Promise<void> {    
     await this.loadData();
     this.autores = await lastValueFrom(this.autorService.all());
+    this.assuntos = await lastValueFrom(this.assuntoService.all());
   }
 
   private async loadData(): Promise<void> {
@@ -98,8 +106,12 @@ export class LivrosComponent implements OnInit {
     this.formGroup.markAsPristine();
   }
 
-  public edit(autor: Livro) : void {
-    this.formGroup.patchValue(autor);
+  public edit(autor: Livro) : void {            
+    this.formGroup.patchValue({ 
+      ...autor, 
+      livroAutores: autor.livroAutor.map(m => m.autorCodAu),
+      livroAssuntos: autor.livroAssunto.map(m => m.assuntoCodAss),
+    });
   }
 
   private async create(autor: Livro): Promise<void> {

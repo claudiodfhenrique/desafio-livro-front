@@ -1,4 +1,4 @@
 export interface LivroAssunto {
-    cod: number;
-    codAss: number;
+    livroCod: number;
+    assuntoCodAss: number;
 }
