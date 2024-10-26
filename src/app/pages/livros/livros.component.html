@@ -1,1 +1,33 @@
-<p>livros works!</p>
+<form [formGroup]="formGroup">
+    <mat-card appearance="outlined">
+        <mat-card-title>Livros</mat-card-title>
+        <mat-card-subtitle>Gerenciamento dos livros</mat-card-subtitle>
+        <mat-card-content>    
+            <mat-form-field>
+                <mat-label>Título</mat-label>
+                <input matInput formControlName="titulo" maxlength="100">
+            </mat-form-field>            
+            <mat-form-field>
+                <mat-label>Editora</mat-label>
+                <input matInput formControlName="editora" maxlength="100">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Edição</mat-label>
+                <input matInput formControlName="edicao" type="number">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Edição</mat-label>
+                <input matInput formControlName="anoPublicacao" type="number" min="1900" max="9999">
+            </mat-form-field>
+            <div class="button-row">                
+                <button 
+                    mat-stroked-button 
+                    (click)="save()" 
+                    [disabled]="isLoading()"
+                >
+                    {{ isLoading() ? 'Enviando' : 'Salvar' }}
+                </button>
+            </div>    
+        </mat-card-content>
+    </mat-card> 
+</form>

@@ -1,1 +1,21 @@
-<p>assuntos works!</p>
+<form [formGroup]="formGroup">
+    <mat-card appearance="outlined">
+        <mat-card-title>Assuntos</mat-card-title>
+        <mat-card-subtitle>Gerenciamento dos assuntos</mat-card-subtitle>
+        <mat-card-content>    
+            <mat-form-field>
+                <mat-label>Descrição</mat-label>
+                <input matInput formControlName="descricao" maxlength="100">
+            </mat-form-field>            
+            <div class="button-row">                
+                <button 
+                    mat-stroked-button 
+                    (click)="save()" 
+                    [disabled]="isLoading()"
+                >
+                    {{ isLoading() ? 'Enviando' : 'Salvar' }}
+                </button>
+            </div>    
+        </mat-card-content>
+    </mat-card> 
+</form>

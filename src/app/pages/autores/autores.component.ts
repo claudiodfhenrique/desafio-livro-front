@@ -43,7 +43,7 @@ export class AutoresComponent implements OnInit {
     private service: AutorService,
     private snackBar: MatSnackBar) {
     this.formGroup = this.fb.group({
-      nome: [null, Validators.required]
+      nome: [null, [Validators.required, Validators.maxLength(100)]]
     });
   }
 
