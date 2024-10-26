@@ -28,13 +28,12 @@
                 <mat-divider></mat-divider>
                 <table mat-table [dataSource]="dataSource" 
                         matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
-                    <!-- Number Column -->
+                    
                     <ng-container matColumnDef="codAu">
                         <th mat-header-cell *matHeaderCellDef>#</th>
                         <td mat-cell *matCellDef="let row">{{row.codAu}}</td>
                     </ng-container>
-
-                    <!-- Title Column -->
+                    
                     <ng-container matColumnDef="nome">
                         <th mat-header-cell *matHeaderCellDef>Nome</th>
                         <td mat-cell *matCellDef="let row">{{row.nome}}</td>
